@@ -1,10 +1,8 @@
-package org.example;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class Interface extends JFrame{
+public class Interface extends JFrame implements ActionListener{
     private JLabel f_pol;
     private JLabel s_pol;
     private JLabel result;
@@ -19,11 +17,8 @@ public class Interface extends JFrame{
     private JButton integration;
     private JFrame frame;
 
-
     public Interface() {
-
         Font timesNewRoman = new Font("Times New Roman", Font.PLAIN, 14);
-
 
         frame = new JFrame("Polynomial Calculator");
         frame.setPreferredSize(new Dimension(400, 300));
@@ -87,14 +82,69 @@ public class Interface extends JFrame{
 
         result_tf = new JTextField();
         result_tf.setFont(timesNewRoman);
-        result_tf.setBounds(200, 140, 150, 20);
+        result_tf.setBounds(100, 140, 250, 20);
         frame.getContentPane().add(result_tf);
 
         frame.pack();
         frame.setVisible(true);
 
 
+        addition.addActionListener(this);
+        subtraction.addActionListener(this);
+        multiplication.addActionListener(this);
+        division.addActionListener(this);
+        derivative.addActionListener(this);
+        integration.addActionListener(this);
     }
 
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == addition || e.getSource() == subtraction ||
+                e.getSource() == multiplication || e.getSource() == division ||
+                e.getSource() == derivative || e.getSource() == integration) {
 
+            String fPolynomial = f_pol_tf.getText();
+            String sPolynomial = s_pol_tf.getText();
+
+
+            if (!Polynomial.isValidPolynomialFormat(fPolynomial) || !Polynomial.isValidPolynomialFormat(sPolynomial)) {
+                result_tf.setText("Error: Invalid format");
+                return;
+            }
+
+
+            Polynomial p1 = Polynomial.build(fPolynomial);
+            Polynomial p2 = Polynomial.build(sPolynomial);
+
+            if (e.getSource() == addition) {
+                Polynomial result = Operations.addition(p1, p2);
+                result_tf.setText(result.toString());
+            } else if (e.getSource() == subtraction) {
+                Polynomial result = Operations.subtraction(p1, p2);
+                result_tf.setText(result.toString());
+            } else if (e.getSource() == multiplication) {
+                Polynomial result = Operations.multiplication(p1, p2);
+                result_tf.setText(result.toString());
+            } else if (e.getSource() == division) {
+                try {
+                    Polynomial[] result = Operations.division(p1, p2);
+                    StringBuilder resultStr = new StringBuilder();
+                    resultStr.append("Quotient: ").append(result[0].toString()).append(", ");
+                    resultStr.append("Remainder: ").append(result[1].toString());
+                    result_tf.setText(resultStr.toString());
+                } catch (IllegalArgumentException ex) {
+                    result_tf.setText("Error: " + ex.getMessage());
+                }
+            } else if (e.getSource() == derivative) {
+                Polynomial result = Operations.derivative(p1);
+                result_tf.setText(result.toString());
+            } else if (e.getSource() == integration) {
+                Polynomial result = Operations.integration(p1);
+                result_tf.setText(result.toString());
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new Interface());
+    }
 }
