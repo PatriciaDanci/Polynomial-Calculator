@@ -5,6 +5,7 @@ Welcome to the Polynomial Calculator app! This Java application features a Graph
 
 
 Features:
+
 ➕ Add, ➖ subtract, ✖️ multiply, and ➗ divide polynomials
 
 🔍 Find the derivative and integral of polynomials
@@ -13,12 +14,9 @@ Features:
 
 
 Documentation:
-
 For an in-depth description of the application, including usage instructions and implementation details, please refer to the Assignment-1.docx documentation.
 
 
 Technologies Used:
-
-Java programming language
-
+Java programming language, 
 Java Swing for GUI development
