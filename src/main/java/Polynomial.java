@@ -137,7 +137,8 @@ public class Polynomial {
                 } else if (parts[0].equals("-")) {
                     coefficient = -1;
                 } else if (parts[0].isEmpty() || parts[0].equals("+")) {
-                    coefficient = parts.length > 1 ? 1 : Double.parseDouble(parts[0]);
+                    //coefficient = parts.length > 1 ? 1 : Double.parseDouble(parts[0]);
+                    coefficient = 1;
                 } else {
                     coefficient = Double.parseDouble(parts[0]);
                 }

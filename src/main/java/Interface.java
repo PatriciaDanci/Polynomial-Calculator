@@ -127,10 +127,9 @@ public class Interface extends JFrame implements ActionListener{
             } else if (e.getSource() == division) {
                 try {
                     Polynomial[] result = Operations.division(p1, p2);
-                    StringBuilder resultStr = new StringBuilder();
-                    resultStr.append("Quotient: ").append(result[0].toString()).append(", ");
-                    resultStr.append("Remainder: ").append(result[1].toString());
-                    result_tf.setText(resultStr.toString());
+                    String resultStr = "Quotient: " + result[0].toString() + ", " +
+                            "Remainder: " + result[1].toString();
+                    result_tf.setText(resultStr);
                 } catch (IllegalArgumentException ex) {
                     result_tf.setText("Error: " + ex.getMessage());
                 }
