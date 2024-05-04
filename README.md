@@ -13,9 +13,12 @@ Features:
 
 
 Documentation:
+
 For an in-depth description of the application, including usage instructions and implementation details, please refer to the Assignment-1.docx documentation.
 
 
 Technologies Used:
+
 Java programming language
+
 Java Swing for GUI development
